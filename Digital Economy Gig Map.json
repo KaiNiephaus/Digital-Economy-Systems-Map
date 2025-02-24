@@ -1,0 +1,273 @@
+flowchart LR
+    %% ---------------------------------------------------
+    %% 1. Legend Node Classes (for colored boxes in Legend)
+    %% ---------------------------------------------------
+    classDef legendEquity fill:#4A86E8,stroke:#4A86E8,stroke-width:2px,color:#fff,font-size:12px;
+    classDef legendRevenue fill:#73B2FF,stroke:#73B2FF,stroke-width:2px,color:#000,font-size:12px;
+    classDef legendData fill:#6AA84F,stroke:#6AA84F,stroke-width:2px,color:#fff,font-size:12px;
+    classDef legendInfluence fill:#F6B26B,stroke:#F6B26B,stroke-width:2px,color:#000,font-size:12px;
+    classDef legendReg fill:#E06666,stroke:#E06666,stroke-width:2px,color:#fff,font-size:12px;
+    
+    %% ---------------------------------------------------
+    %% 2. Class Definitions for Arrow (Flow) Styles
+    %% ---------------------------------------------------
+    classDef equityFlow stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    classDef revenueFlow stroke:#73B2FF,stroke-width:2px;
+    classDef dataFlow stroke:#6AA84F,stroke-width:2px;
+    classDef influenceFlow stroke:#F6B26B,stroke-width:2px,stroke-dasharray:3,3;
+    classDef regFlow stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    
+    %% ---------------------------------------------------
+    %% 3. Class for the Central Node
+    %% ---------------------------------------------------
+    classDef mainFocus font-size:18px,font-weight:bold;
+    
+    %% ---------------------------------------------------
+    %% CENTRAL NODE: Regular People (R1: RP)
+    %% ---------------------------------------------------
+    O(("Regular People<br/>& Unwilling Content Creators")):::mainFocus;
+    style O fill:#FFE6CC,stroke:#333,stroke-width:2px;
+    
+    %% ---------------------------------------------------
+    %% R2: Global Financial Institutions (GFI)
+    %% ---------------------------------------------------
+    subgraph BFS[Global Financial Institutions]
+        direction TB
+        B1["Institutional Investors<br/>(Vol: \$600B)"]
+        B2["Private Equity & VC Investors<br/>(Vol: \$300B)"]
+    end
+    style BFS fill:#FCEBD6,stroke:#333,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% R3: Financial Flows (FF)
+    %% ---------------------------------------------------
+    subgraph FIN[Financial Flows]
+        direction TB
+        F1["Capital Injections<br/>(Inst. & PE/VC)"]
+        F2a["Advertising Revenue"]
+        F2b["Other Revenue<br/>(Data Sales, Subs, Fees)"]
+        F3["Profit Allocation<br/>(Reinvestment, Dividends, M&A)"]
+        F4["Regulatory Costs & Fines"]
+    end
+    style FIN fill:#FFF4E6,stroke:#333,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% R4: Platforms & Labor (PL)
+    %% ---------------------------------------------------
+    subgraph STK[Platforms & Labor]
+        direction TB
+        C1["Social Media Platforms (SM)"]
+        C2["Gig/E-commerce Platforms (EC)"]
+        D["Gig Economy Workers (GEW)"]
+        F["Data Brokers & Marketing Firms"]
+        E["Technology Providers & Innovators"]
+    end
+    style STK fill:#FCEBD6,stroke:#333,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% R5: Processes & Mechanisms (PM)
+    %% ---------------------------------------------------
+    subgraph PROC[Processes & Mechanisms]
+        direction TB
+        I["Data Harvesting & Monetization<br/>(Collects & Sells Data)"]
+        J["Digital Labor Dynamics<br/>(Workforce Shifts)"]
+    end
+    style PROC fill:#E6F7FF,stroke:#333,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% R6: Resources (RS)
+    %% ---------------------------------------------------
+    subgraph RES[Resources]
+        direction TB
+        K["Digital Infrastructure & Connectivity"]
+        L["Data Assets & Analytics"]
+        M["Global Capital & Investments"]
+        N["Skilled Digital Workforce"]
+        R1["AI & Automation"]
+    end
+    style RES fill:#FFFBCC,stroke:#333,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% R7: Regulatory Bodies (RB)
+    %% ---------------------------------------------------
+    subgraph REG[Regulatory Bodies]
+        direction TB
+        G["Nationals Governments & International Regulators"]
+    end
+    style REG fill:#FCEBD6,stroke:#333,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% Outer Ring Connections (Overall Value Chain)
+    %% ---------------------------------------------------
+    O -- "User data flows":::dataFlow --> BFS;
+    BFS -- "Capital injections":::equityFlow --> FIN;
+    FIN -- "Revenue generation":::revenueFlow --> STK;
+    STK -- "Operational feedback":::dataFlow --> PROC;
+    PROC -- "Process innovations":::dataFlow --> RES;
+    RES -- "Resource support":::equityFlow --> REG;
+    REG -- "Policy & influence":::influenceFlow --> O;
+    
+    %% ---------------------------------------------------
+    %% Internal Edges (Within/Between Rings)
+    %% ---------------------------------------------------
+    B1 -- "Invests equity" --> F1;
+    B2 -- "Invests equity" --> F1;
+    
+    F1 -- "Funds platforms" --> C1;
+    F1 -- "Funds platforms" --> C2;
+    C1 -- "Generates ad revenue" --> F2a;
+    C2 -- "Generates other revenue" --> F2b;
+    F2a -- "Feeds into" --> F3;
+    F2b -- "Feeds into" --> F3;
+    F3 -- "Returns as shareholder value" --> B1;
+    F3 -- "Returns as shareholder value" --> B2;
+    
+    %% Revised Flows Involving Regular People:
+    %% Regular People generate content and engagement,
+    %% which is then captured by platforms. Platforms return curated content and social connections.
+    O -- "Generates content & engagement" --> C1;
+    O -- "Generates content & engagement" --> C2;
+    C1 -- "Provides curated content & social connections" --> O;
+    C2 -- "Provides curated content & social connections" --> O;
+    
+    %% Additional feedback from consumers:
+    O -- "Provides feedback & reviews" --> C2;
+    O -- "Contributes to algorithm training" --> I;
+    
+    %% Other flows remain:
+    D -- "Supplies labor & data" --> C2;
+    
+    I -- "Collects data from" --> O;
+    I -- "Collects data from" --> D;
+    I -- "Sells data to" --> F;
+    C1 -- "Sells data to" --> F;
+    J -- "Reflects labor market shifts" --> D;
+    
+    K -- "Enables ops" --> C1;
+    K -- "Enables ops" --> C2;
+    L -- "Empowers analytics" --> C1;
+    L -- "Empowers analytics" --> C2;
+    M -- "Boosts valuations" --> C1;
+    M -- "Boosts valuations" --> C2;
+    N -- "Drives innovation" --> E;
+    R1 -- "Advances automation" --> E;
+    
+    G -- "Imposes fines" --> F4;
+    F4 -- "Impacts net profits" --> F3;
+    C1 -- "Exerts political influence" --> G;
+    E -- "Lobbies & influences" --> G;
+    G -- "Sets policies" --> C1;
+    G -- "Sets policies" --> C2;
+    G -- "Monitors labor practices" --> D;
+    G -- "Enforces data protection" --> C1;
+    G -- "Enforces data protection" --> C2;
+    
+    C1 -- "Revenue fuels reinvestment" --> F3;
+    C2 -- "Revenue fuels reinvestment" --> F3;
+    F3 -- "Reinvestment" --> M;
+    E -- "Enhances data processing" --> C1;
+    E -- "Enhances data processing" --> C2;
+    G -- "Regulations curb concentration" --> C1;
+    G -- "Regulations curb concentration" --> C2;
+    C1 -- "Adapts to comply or circumvent" --> G;
+    C2 -- "Adapts to comply or circumvent" --> G;
+    
+    %% ---------------------------------------------------
+    %% Additional Flow: Data Brokers Contribute to Revenue
+    %% (Data Brokers now sell aggregated data to ad platforms)
+    %% ---------------------------------------------------
+    F -- "Aggregates & sells data to ad platforms" --> F2a;
+    linkStyle 53 stroke:#73B2FF,stroke-width:2px;
+    
+    %% ---------------------------------------------------
+    %% Legend: Flow Types (Colored Legend Nodes)
+    %% ---------------------------------------------------
+    subgraph LEG[Legend]
+        direction TB
+        LE1["Equity Flow: Blue Dashed"]:::legendEquity;
+        LE2["Revenue Flow: Light Blue Solid"]:::legendRevenue;
+        LE3["Data Flow: Green Solid"]:::legendData;
+        LE4["Political Influence: Orange Dashed"]:::legendInfluence;
+        LE5["Regulatory Flow: Red Dashed"]:::legendReg;
+    end
+    style LEG fill:#f9f9f9,stroke:#999,stroke-width:1px,stroke-dasharray:2,2;
+    
+    %% ---------------------------------------------------
+    %% Ring Annotations (Ring Structure Labels)
+    %% ---------------------------------------------------
+    subgraph RINGS[Ring Structure]
+        direction LR
+        RA1["R1: RP – Regular People"];
+        RA2["R2: GFI – Global Financial Institutions"];
+        RA3["R3: FF – Financial Flows"];
+        RA4["R4: PL – Platforms & Labor"];
+        RA5["R5: PM – Processes & Mechanisms"];
+        RA6["R6: RS – Resources"];
+        RA7["R7: RB – Regulatory Bodies"];
+    end
+    style RINGS fill:#ffffff,stroke:#666,stroke-width:1px,stroke-dasharray:4,4;
+    
+    %% ---------------------------------------------------
+    %% LinkStyle Commands to Color Each Arrow
+    %% ---------------------------------------------------
+    linkStyle 0 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 1 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 2 stroke:#73B2FF,stroke-width:2px;
+    linkStyle 3 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 4 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 5 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 6 stroke:#F6B26B,stroke-width:2px,stroke-dasharray:3,3;
+    
+    linkStyle 7 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 8 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    
+    linkStyle 9 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 10 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 11 stroke:#73B2FF,stroke-width:2px;
+    linkStyle 12 stroke:#73B2FF,stroke-width:2px;
+    linkStyle 13 stroke:#73B2FF,stroke-width:2px;
+    linkStyle 14 stroke:#73B2FF,stroke-width:2px;
+    linkStyle 15 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 16 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    
+    linkStyle 17 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 18 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 19 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 20 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 21 stroke:#6AA84F,stroke-width:2px;
+    
+    linkStyle 22 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 23 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 24 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 25 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 26 stroke:#6AA84F,stroke-width:2px;
+    
+    linkStyle 27 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 28 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 29 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 30 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 31 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 32 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 33 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 34 stroke:#6AA84F,stroke-width:2px;
+    
+    linkStyle 35 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 36 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 37 stroke:#F6B26B,stroke-width:2px,stroke-dasharray:3,3;
+    linkStyle 38 stroke:#F6B26B,stroke-width:2px,stroke-dasharray:3,3;
+    linkStyle 39 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 40 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 41 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 42 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 43 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    
+    linkStyle 44 stroke:#73B2FF,stroke-width:3px;
+    linkStyle 45 stroke:#73B2FF,stroke-width:3px;
+    linkStyle 46 stroke:#4A86E8,stroke-width:2px,stroke-dasharray:4,4;
+    linkStyle 47 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 48 stroke:#6AA84F,stroke-width:2px;
+    linkStyle 49 stroke:#F6B26B,stroke-width:2px,stroke-dasharray:3,3;
+    linkStyle 50 stroke:#F6B26B,stroke-width:2px,stroke-dasharray:3,3;
+    linkStyle 51 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 52 stroke:#E06666,stroke-width:2px,stroke-dasharray:1,3;
+    linkStyle 53 stroke:#73B2FF,stroke-width:2px;
