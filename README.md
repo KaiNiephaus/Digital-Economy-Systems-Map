@@ -1,7 +1,7 @@
 # Digital-Economy-Systems-GigaMap (V1.0)
 This system map shows actors, dynamics, flows and relationships of actors in the digital economy.
 It utilizes JSON to display the map via [mermaid](https://mermaid.live/) editor
-
+See Files: Digital Economy Gigamap V1.0.png
 
 # How to:
 Copy and paste the JSON code into the mermaid live editor to display the map as a flow chart.
