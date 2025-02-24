@@ -8,7 +8,7 @@ Copy and paste the JSON code into the mermaid live editor to display the map as 
 Tweak and refine.
 
 # Note
-Work in progress!
+Work in progress! Lots of flaws.
 
 The map is designed with a circular or ring structure in mind – which is not possible to display in mermaid.
 The map serves as a low fidelity starting point for:
@@ -17,11 +17,10 @@ The map serves as a low fidelity starting point for:
 
 
 Ring structure from center to outer layer:
-
-R1: CENTRAL NODE: Regular People (RP)
-R2: Global Financial Institutions (GFI)
-R3: Financial Flows (FF)
-R4: Platforms & Labor (PL)
-R5: Processes & Mechanisms (PM)
-R6: Resources (RS)
-R7: Regulatory Bodies (RB)
+1. R1: CENTRAL NODE: Regular People (RP)
+2. R2: Global Financial Institutions (GFI)
+3. R3: Financial Flows (FF)
+4. R4: Platforms & Labor (PL)
+5. Processes & Mechanisms (PM)
+6. Resources (RS)
+7. Regulatory Bodies (RB)
